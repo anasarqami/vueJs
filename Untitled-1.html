@@ -1,0 +1,48 @@
+<template>
+  <div>
+    <h2>Add Person</h2>
+    <form @submit.prevent="addPerson">
+      <label for="name">Name:</label>
+      <input type="text" id="name" v-model="person.name" required>
+      <label for="email">Email:</label>
+      <input type="email" id="email" v-model="person.email" required>
+      <label for="age">Age:</label>
+      <input type="number" id="age" v-model="person.age" required>
+      <button type="submit">Add</button>
+    </form>
+
+    <h2>People List</h2>
+    <ul>
+      <li v-for="(person, index) in people" :key="index">
+        <strong>Name:</strong> {{ person.name }},
+        <strong>Email:</strong> {{ person.email }},
+        <strong>Age:</strong> {{ person.age }}
+      </li>
+    </ul>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      person: {
+        name: '',
+        email: '',
+        age: ''
+      },
+      people: []
+    };
+  },
+  methods: {
+    addPerson() {
+      // Add person to the list
+      this.people.push({ ...this.person });
+      // Clear the input fields
+      this.person.name = '';
+      this.person.email = '';
+      this.person.age = '';
+    }
+  }
+};
+</script>
